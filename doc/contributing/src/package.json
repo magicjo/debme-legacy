@@ -1,0 +1,13 @@
+{
+  "name": "contributing-doc-graph",
+  "scripts": {
+    "start": "live-server"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "gitgraph.js": "1.8.3"
+  },
+  "devDependencies": {
+    "live-server": "1.2.0"
+  }
+}
