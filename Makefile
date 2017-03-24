@@ -53,3 +53,8 @@ install-dependencies:
 	${APT_GET_BIN} python-setuptools python-dev libssl-dev
 	${EASY_INSTALL_BIN} pip
 	${PIP_BIN} ansible
+
+## Clean
+.PHONY: clean
+clean:
+	find src/ -name "*.pyc" -type f -delete
