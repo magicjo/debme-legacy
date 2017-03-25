@@ -24,6 +24,7 @@ RM_BIN=rm --force
 CP_BIN=cp --recursive
 LN_BIN=ln --symbolic --force
 UNLINK_BIN=unlink
+SED_BIN=sed -i
 
 ## FILES CONF
 BIN_PRIVATE_NAME=debme.sh
@@ -37,6 +38,7 @@ SRC_DIR=src/*
 install: uninstall install-dependencies
 	${MKDIR_BIN} ${INSTALL_DIR}
 	${CP_BIN} ${SRC_DIR} ${INSTALL_DIR}
+	${SED_BIN} "s#$$\PWD#${INSTALL_DIR}#g" ${INSTALL_DIR}/${BIN_PRIVATE_NAME}
 	${MKDIR_BIN} ${BIN_DIR}
 	${LN_BIN} ${INSTALL_DIR}/${BIN_PRIVATE_NAME} ${BIN_DIR}/${BIN_PUBLIC_NAME}
 
@@ -50,7 +52,7 @@ uninstall:
 PHONY: install-dependencies
 install-dependencies:
 	${APT_GET_BIN} build-essential
-	${APT_GET_BIN} python-setuptools python-dev libssl-dev
+	${APT_GET_BIN} python-setuptools python-dev libssl-dev sshpass
 	${EASY_INSTALL_BIN} pip
 	${PIP_BIN} ansible
 
@@ -58,3 +60,4 @@ install-dependencies:
 .PHONY: clean
 clean:
 	find src/ -name "*.pyc" -type f -delete
+	find src/ -name "*.retry" -type f -delete

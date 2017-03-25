@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python debme.py $@
+DEBME_PLAYBOOKS_PATH="$PWD/playbooks" python $PWD/debme.py $@
