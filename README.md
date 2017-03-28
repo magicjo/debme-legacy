@@ -39,4 +39,6 @@ cd debme/src
 
 ## Test
 
-**WIP**
+```
+make test
+```
