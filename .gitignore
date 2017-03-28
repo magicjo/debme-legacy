@@ -1,0 +1,57 @@
+#====================================================================#
+# TOOLS
+#====================================================================#
+
+## Ansible
+*.retry
+
+## Python
+*.pyc
+
+#====================================================================#
+# IDE
+#====================================================================#
+
+## JetBrains
+.idea/
+
+## Emacs
+*~
+\#*\#
+.\#*
+
+## SublimeText
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+## Cloud9
+.c9revisions
+.c9
+
+## Eclipse
+.metadata
+.settings/
+.project
+
+## NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+## Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+
+## VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
