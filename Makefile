@@ -66,3 +66,4 @@ clean:
 .PHONY: test
 test: clean
 	./test/syntax/test.sh
+	./test/exec/test.sh

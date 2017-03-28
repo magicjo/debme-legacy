@@ -39,6 +39,7 @@ cd debme/src
 
 ## Test
 
+You must have `docker` to run tests.
 ```
 make test
 ```
