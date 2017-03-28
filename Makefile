@@ -61,3 +61,9 @@ install-dependencies:
 clean:
 	find src/ -name "*.pyc" -type f -delete
 	find src/ -name "*.retry" -type f -delete
+
+## Test
+.PHONY: test
+test: clean
+	./test/syntax/test.sh
+	./test/exec/test.sh

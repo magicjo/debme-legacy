@@ -65,6 +65,15 @@ setup_parser.add_argument(
     default=[]
 )
 
+# SETUP debug-playbooks
+setup_parser.add_argument(
+    '--debug-playbooks',
+    help=argparse.SUPPRESS,
+    dest='debug_playbooks',
+    action='store_true',
+    default=False
+)
+
 
 # FOO BAR PARSER
 class ThrowingArgumentParser(argparse.ArgumentParser):

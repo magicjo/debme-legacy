@@ -81,8 +81,13 @@ def ansible_run(playbooks, config):
     try:
         hosts = create_hosts(output_dir, config['hosts_file'][0], config['host_name'])
         playbook = create_playbook(output_dir, playbooks, config['playbooks_path'])
-        run_playbook(hosts, playbook, config['verbose'])
-        shutil.rmtree(output_dir)
+        # DEBUG
+        if config['debug_playbooks'] == True:
+            print(output_dir)
+        # RUN
+        else:
+            run_playbook(hosts, playbook, config['verbose'])
+            shutil.rmtree(output_dir)
     except Exception as err:
         shutil.rmtree(output_dir)
         raise err

@@ -39,4 +39,7 @@ cd debme/src
 
 ## Test
 
-**WIP**
+You must have `docker` to run tests.
+```
+make test
+```
