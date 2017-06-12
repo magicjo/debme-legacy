@@ -11,10 +11,9 @@ function docker_build(){
 }
 
 function docker_run() {
-  local dockerContainer=$(docker run --detach --publish-all --name \
+  local dockerContainer=$(docker run --detach -p "${TEST__CONF_DOCKER_SSH_PORT}":22 --name \
       "${TEST__CONF_DOCKER_CONTAINER_NAME}" "${TEST__CONF_DOCKER_IMAGE}")
-  local dockerAddress=$(docker port "${TEST__CONF_DOCKER_CONTAINER_NAME}" 22)
-  echo "${dockerContainer}:${dockerAddress}"
+  echo "${dockerContainer}"
 }
 
 function docker_clean(){
@@ -24,15 +23,11 @@ function docker_clean(){
 }
 
 function docker_print_container(){
-  local dockerInfo="${1}"
-  local dockerContainer=$(echo "${dockerInfo}" | cut --delimiter=":" --field="1")
-  local dockerIp=$(echo "${dockerInfo}" | cut --delimiter=":" --field="2")
-  local dockerPort=$(echo "${dockerInfo}" | cut --delimiter=":" --field="3")
   cat <<-EOF
 ================================
-container: ${dockerContainer}
-ip: ${dockerIp}
-port: ${dockerPort}
+container: ${TEST__CONF_DOCKER_CONTAINER_NAME}
+ip: ${TEST__CONF_DOCKER_SSH_IP}
+port: ${TEST__CONF_DOCKER_SSH_PORT}
 ================================
 EOF
 }
