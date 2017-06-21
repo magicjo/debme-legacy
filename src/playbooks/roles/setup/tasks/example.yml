@@ -1,4 +1,0 @@
----
-- name: Echo truc {{truc.name}}
-  become: true
-  command: echo {{truc.name}}

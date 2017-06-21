@@ -1,0 +1,11 @@
+---
+- name: (registry) create source.list
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+    backup: yes
+    force: yes
+
+- name: (registry) update source.list cache
+  apt:
+    update_cache: yes
