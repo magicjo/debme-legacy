@@ -3,3 +3,7 @@ __setup__registry_apt: 'http://ftp.fr.debian.org/debian/'
 __setup__registry_apt_security: 'http://security.debian.org/'
 __setup__registry_apt_src: 'yes'
 __setup__registry_apt_backports: 'yes'
+
+__setup__info_system: 'yes'
+__setup__info_hardware: 'yes'
+__setup__info_disk: 'yes'

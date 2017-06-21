@@ -1,2 +1,3 @@
 ---
 - include: registry.yml
+- include: info.yml

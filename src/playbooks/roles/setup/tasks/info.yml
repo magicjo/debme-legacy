@@ -1,0 +1,41 @@
+---
+- name: (info) add dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - coreutils
+    - lshw
+
+- name: (info) get system info
+  shell: uname --all
+  register: result
+  when: __setup__info_system == "yes"
+
+- name: (info) print system info
+  debug:
+    var: result.stdout_lines
+    verbosity: 0
+  when: __setup__info_system == "yes"
+
+- name: (info) get hardware info
+  shell: lshw -short -quiet
+  register: result
+  when: __setup__info_hardware == "yes"
+
+- name: (info) print hardware info
+  debug:
+    var: result.stdout_lines
+    verbosity: 0
+  when: __setup__info_hardware == "yes"
+
+- name: (info) get disk info
+  shell: df --human-readable
+  register: result
+  when: __setup__info_disk == "yes"
+
+- name: (info) print disk info
+  debug:
+    var: result.stdout_lines
+    verbosity: 0
+  when: __setup__info_disk == "yes"
