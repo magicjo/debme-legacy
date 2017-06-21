@@ -92,3 +92,27 @@ Environments hosts described by a json file.
 }
 
 ```
+
+### Vars of hosts.json
+
+#### Setup.registry
+
+- `setup`
+    - `registry_apt` (*url*): The apt registry to use. By default (`"http://ftp.fr.debian.org/debian/"`)
+    - `registry_apt_security` (*url*): The apt registry (for security) to use. By default (`"http://security.debian.org/"`)
+    - `registry_apt_src` (*yes|no*): If you want the apt sources. By default (`"yes"`)
+    - `registry_apt_backports` (*yes|no*): If you want the apt backports. By default (`"yes"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "registry_apt": "http://ftp.fr.debian.org/debian/",
+      "registry_apt_security": "http://security.debian.org/",
+      "registry_apt_src": "yes",
+      "registry_apt_backports": "yes"
+    }
+  }
+}
+```
