@@ -116,3 +116,23 @@ Environments hosts described by a json file.
   }
 }
 ```
+
+#### Setup.info
+
+- `setup`
+    - `info_system` (*yes|no*): If you want to show info about system. By default (`"yes"`)
+    - `info_hardware` (*yes|no*): If you want to show info about hardware. By default (`"yes"`)
+    - `info_disk` (*yes|no*): If you want to show info about disk. By default (`"yes"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "info_system": "yes",
+      "info_hardware": "yes",
+      "info_disk": "yes"
+    }
+  }
+}
+```
