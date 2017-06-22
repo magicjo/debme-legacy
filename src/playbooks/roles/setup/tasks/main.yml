@@ -1,3 +1,4 @@
 ---
 - include: registry.yml
 - include: info.yml
+- include: fish.yml
