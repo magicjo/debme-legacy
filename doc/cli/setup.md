@@ -136,3 +136,25 @@ Environments hosts described by a json file.
   }
 }
 ```
+
+#### Setup.user
+
+- `setup`
+    - `user_login` (*str*): The user login to ensure. By default (`"user"`)
+    - `user_identity` (*str*): The use name to ensure. By default (`"My User"`)
+    - `user_password` (*hash*): The user password to ensure (use `mkpasswd --method=sha-512`). By default (`"password"`)
+    - `user_shell` (*path*): The user default shell. By default (`"/usr/bin/fish"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "user_login": "user",
+      "user_identity": "My User",
+      "user_password": "$6$ZInTPAVe2FbY5UEV$X6bTmG4ZUgBAZ4j4BxhGBkGgtNSNwpCOa7lI/zJyTUHfN6GLgRe4JF/.L228ozUlutAbJlmcwS4F0QER4cznu1",
+      "user_shell": "/usr/bin/fish"
+    }
+  }
+}
+```
