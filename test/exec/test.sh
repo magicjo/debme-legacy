@@ -67,6 +67,6 @@ fi
 # CLEAN UP TEST
 if [[ "${HAVE_END}" = "true" ]]
 then
-    rm "${TEST__CONF_SETUP_TMP}"*
     docker_clean
+    rm -Rf "${TEST__CONF_SETUP_TMP}"*
 fi
