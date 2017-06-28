@@ -23,3 +23,4 @@ function syntax_check(){
 
 # CHECK SETUP
 syntax_check "${TEST__DEBME_BIN} setup --envs ${TEST__DEBME_ENVS_SETUP}"
+syntax_check "${TEST__DEBME_BIN} tasks --envs ${TEST__DEBME_ENVS_TASKS}"

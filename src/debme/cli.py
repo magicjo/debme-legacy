@@ -7,6 +7,7 @@ import os
 # PARSERS ENUM
 PARSERS_ENUM = {
     'SETUP': 'setup',
+    'TASKS': 'tasks',
     'FOO_BAR': 'foo_bar',
 }
 
@@ -27,6 +28,53 @@ project: "https://github.com/magicjo/debme"''',
 )
 sub_parsers = parser.add_subparsers()
 
+
+def envs_args(parser, required):
+    # envs arg cli
+    parser.add_argument(
+        '--envs', '-e',
+        help='''environments hosts described by a json file''',
+        nargs=1,
+        required=required,
+        dest='hosts_file',
+        action='store'
+    )
+
+
+def verbose_args(parser):
+    # verbose arg cli
+    parser.add_argument(
+        '--verbose', '-v',
+        help='''verbosely list files processed''',
+        dest='verbose',
+        action='count',
+        default=0
+    )
+
+
+def hosts_args(parser):
+    # hosts arg cli
+    parser.add_argument(
+        '--hosts', '-H',
+        help='''filtering defined hosts in environments by name for execution''',
+        nargs='+',
+        dest='host_name',
+        action='store',
+        default=[]
+    )
+
+
+def debug_args(parser):
+    # debug-playbooks
+    parser.add_argument(
+        '--debug-playbooks',
+        help=argparse.SUPPRESS,
+        dest='debug_playbooks',
+        action='store_true',
+        default=False
+    )
+
+
 # DEBME SETUP PARSER
 setup_parser = sub_parsers.add_parser(
     'setup',
@@ -35,45 +83,41 @@ you must run this command once before install other tasks,
 documentation available on "https://github.com/magicjo/debme/blob/master/doc/cli/setup.md"'''
 )
 setup_parser.set_defaults(which=PARSERS_ENUM['SETUP'])
+envs_args(setup_parser, True)
+verbose_args(setup_parser)
+hosts_args(setup_parser)
+debug_args(setup_parser)
 
-# SETUP envs arg cli
-setup_parser.add_argument(
-    '--envs', '-e',
-    help='''environments hosts described by a json file''',
-    nargs=1,
-    required=True,
-    dest='hosts_file',
-    action='store'
+# DEBME TASKS PARSER
+tasks_parser = sub_parsers.add_parser(
+    'tasks',
+    help='''command used to execute tasks on the remote environment for debme,
+you must run 'setup' once before install other tasks,
+documentation available on "https://github.com/magicjo/debme/blob/master/doc/cli/tasks.md"'''
 )
-
-# SETUP verbose arg cli
-setup_parser.add_argument(
-    '--verbose', '-v',
-    help='''verbosely list files processed''',
-    dest='verbose',
-    action='count',
-    default=0
-)
-
-# SETUP hosts arg cli
-setup_parser.add_argument(
-    '--hosts', '-H',
-    help='''filtering defined hosts in environments by name for execution''',
-    nargs='+',
-    dest='host_name',
-    action='store',
-    default=[]
-)
-
-# SETUP debug-playbooks
-setup_parser.add_argument(
-    '--debug-playbooks',
-    help=argparse.SUPPRESS,
-    dest='debug_playbooks',
+tasks_parser.set_defaults(which=PARSERS_ENUM['TASKS'])
+tasks_parser_exclusive = tasks_parser.add_mutually_exclusive_group(required=True)
+# names arg cli
+tasks_parser_exclusive.add_argument(
+    '--list', '-l',
+    help='''list the defined tasks''',
+    dest='list',
     action='store_true',
     default=False
 )
-
+# names arg cli
+tasks_parser.add_argument(
+    '--names', '-T',
+    help='''filtering defined tasks by name for execution''',
+    nargs='+',
+    dest='tasks_name',
+    action='store',
+    default=[]
+)
+envs_args(tasks_parser_exclusive, False)
+verbose_args(tasks_parser)
+hosts_args(tasks_parser)
+debug_args(tasks_parser)
 
 # FOO BAR PARSER
 class ThrowingArgumentParser(argparse.ArgumentParser):
