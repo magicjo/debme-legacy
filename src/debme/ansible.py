@@ -34,8 +34,9 @@ def create_hosts(output_dir, hosts_path, available_host_names):
                 # Header host vars
                 file.write('[' + host_name + ':vars]\n')
                 # Vars host
-                for vars_key, vars_value in host['vars'].items():
-                    file.write(vars_key + '=' + json.dumps(vars_value) + '\n')
+                for vars_key_group, vars_value_group in host['vars'].items():
+                    for vars_key, vars_value in vars_value_group.items():
+                        file.write('__' + vars_key_group + '__' + vars_key + '=' + json.dumps(vars_value) + '\n')
             # Reference groups
             if 'types' in host:
                 for type_name in host['types']:

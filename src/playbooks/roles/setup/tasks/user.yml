@@ -1,0 +1,25 @@
+---
+- name: (user) install sudo
+  apt:
+    name: sudo
+    state: present
+
+- name: (user) create the user '{{ __setup__user_login }}'
+  user:
+    name: "{{ __setup__user_login }}"
+    comment: "{{ __setup__user_identity }}"
+    createhome: yes
+    group: sudo
+    password: "{{ __setup__user_password }}"
+    shell: "{{ __setup__user_shell }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: (user) sudo the user '{{ __setup__user_login }}'
+  template:
+    src: sudoer.j2
+    dest: "/etc/sudoers.d/{{ __setup__user_login }}"
+    owner: root
+    group: root
+    mode: 0440

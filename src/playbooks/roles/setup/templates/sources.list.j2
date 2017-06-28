@@ -1,0 +1,25 @@
+# Official
+deb {{__setup__registry_apt}} {{ansible_distribution_release}} main contrib non-free
+{% if __setup__registry_apt_src is equalto "yes" %}
+deb-src {{__setup__registry_apt}} {{ansible_distribution_release}} main contrib non-free
+{% endif %}
+
+# Security
+deb {{__setup__registry_apt_security}} {{ansible_distribution_release}}/updates main contrib non-free
+{% if __setup__registry_apt_src is equalto "yes" %}
+deb-src {{__setup__registry_apt_security}} {{ansible_distribution_release}}/updates main contrib non-free
+{% endif %}
+
+# Update
+deb {{__setup__registry_apt}} {{ansible_distribution_release}}-updates main contrib non-free
+{% if __setup__registry_apt_src is equalto "yes" %}
+deb-src {{__setup__registry_apt}} {{ansible_distribution_release}}-updates main contrib non-free
+{% endif %}
+
+{% if __setup__registry_apt_backports is equalto "yes" %}
+# Backports
+deb {{__setup__registry_apt}} {{ansible_distribution_release}}-backports main contrib non-free
+{% if __setup__registry_apt_src is equalto "yes" %}
+deb-src {{__setup__registry_apt}} {{ansible_distribution_release}}-backports main contrib non-free
+{% endif %}
+{% endif %}

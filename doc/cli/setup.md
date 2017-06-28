@@ -92,3 +92,69 @@ Environments hosts described by a json file.
 }
 
 ```
+
+### Vars of hosts.json
+
+#### Setup.registry
+
+- `setup`
+    - `registry_apt` (*url*): The apt registry to use. By default (`"http://ftp.fr.debian.org/debian/"`)
+    - `registry_apt_security` (*url*): The apt registry (for security) to use. By default (`"http://security.debian.org/"`)
+    - `registry_apt_src` (*yes|no*): If you want the apt sources. By default (`"yes"`)
+    - `registry_apt_backports` (*yes|no*): If you want the apt backports. By default (`"yes"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "registry_apt": "http://ftp.fr.debian.org/debian/",
+      "registry_apt_security": "http://security.debian.org/",
+      "registry_apt_src": "yes",
+      "registry_apt_backports": "yes"
+    }
+  }
+}
+```
+
+#### Setup.info
+
+- `setup`
+    - `info_system` (*yes|no*): If you want to show info about system. By default (`"yes"`)
+    - `info_hardware` (*yes|no*): If you want to show info about hardware. By default (`"yes"`)
+    - `info_disk` (*yes|no*): If you want to show info about disk. By default (`"yes"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "info_system": "yes",
+      "info_hardware": "yes",
+      "info_disk": "yes"
+    }
+  }
+}
+```
+
+#### Setup.user
+
+- `setup`
+    - `user_login` (*str*): The user login to ensure. By default (`"user"`)
+    - `user_identity` (*str*): The use name to ensure. By default (`"My User"`)
+    - `user_password` (*hash*): The user password to ensure (use `mkpasswd --method=sha-512`). By default (`"password"`)
+    - `user_shell` (*path*): The user default shell. By default (`"/usr/bin/fish"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "user_login": "user",
+      "user_identity": "My User",
+      "user_password": "$6$ZInTPAVe2FbY5UEV$X6bTmG4ZUgBAZ4j4BxhGBkGgtNSNwpCOa7lI/zJyTUHfN6GLgRe4JF/.L228ozUlutAbJlmcwS4F0QER4cznu1",
+      "user_shell": "/usr/bin/fish"
+    }
+  }
+}
+```

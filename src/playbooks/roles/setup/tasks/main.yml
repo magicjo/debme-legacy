@@ -1,2 +1,6 @@
 ---
-- include: example.yml
+- include: registry.yml
+- include: info.yml
+- include: fish.yml
+- include: user.yml
+- include: sshd.yml
