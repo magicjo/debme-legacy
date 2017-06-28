@@ -5,7 +5,9 @@
     dest: /etc/apt/sources.list
     backup: yes
     force: yes
+  become: yes
 
 - name: (registry) update source.list cache
   apt:
     update_cache: yes
+  become: yes
