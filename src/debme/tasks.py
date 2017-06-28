@@ -4,16 +4,14 @@
 import sys
 
 AVAILABLE_TASKS = [
-    'toto',
-    'tata'
+    'system'
 ]
 
 
 # List task
 def list_tasks():
     print '''
-tata: DO NO THING    
-toto: DO NO THING    
+- system: task to configure the system (ntp, shell, ...) on the host.
 '''
 
 
