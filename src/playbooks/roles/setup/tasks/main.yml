@@ -3,3 +3,4 @@
 - include: info.yml
 - include: fish.yml
 - include: user.yml
+- include: sshd.yml
