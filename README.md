@@ -27,6 +27,14 @@ Description of the options are available on the [cli setup page](./doc/cli/setup
 debme setup --envs hosts.json -vvvv
 ```
 
+### Tasks
+
+Execute tasks for your remotes hosts.
+Description of the options are available on the [cli tasks page](./doc/cli/tasks.md).
+```bash
+debme tasks --envs hosts.json --names task1 task2 -vvvv
+```
+
 ## Develop
 
 You can develop `debme` on your own local computer.

@@ -1,3 +1,0 @@
----
-- name: Echo TATA {{tata}}
-  command: echo {{tata}}

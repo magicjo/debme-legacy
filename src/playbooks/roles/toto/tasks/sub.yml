@@ -1,3 +1,0 @@
----
-- name: Echo TOTO {{toto}}
-  command: echo {{toto}}
