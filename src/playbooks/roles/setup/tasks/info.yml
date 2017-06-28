@@ -6,6 +6,7 @@
   with_items:
     - coreutils
     - lshw
+  become: yes
 
 - name: (info) get system info
   shell: uname --all

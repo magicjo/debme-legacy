@@ -4,6 +4,7 @@
     src: sshd_banner.j2
     dest: /etc/ssh/sshd_banner
     force: yes
+  become: yes
 
 - name: (sshd) configure sshd
   template:
@@ -11,6 +12,7 @@
     dest: /etc/ssh/sshd_config
     backup: yes
     force: yes
+  become: yes
 
 - name: (sshd) restart
   service:
@@ -18,3 +20,4 @@
     enabled: true
     state: started
   when: ansible_virtualization_type != 'docker'
+  become: yes
