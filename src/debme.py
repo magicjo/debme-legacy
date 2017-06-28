@@ -13,3 +13,11 @@ if __name__ == '__main__':
     # Case setup
     if args['which'] == debme.PARSERS_ENUM['SETUP']:
         debme.ansible_run(['setup'], args)
+    # Case setup
+    if args['which'] == debme.PARSERS_ENUM['TASKS']:
+        if args['list']:
+            debme.list_tasks()
+        else:
+            tasks = debme.verify_tasks(args['tasks_name'])
+            tasks = debme.sort_tasks(tasks)
+            debme.ansible_run(tasks, args)

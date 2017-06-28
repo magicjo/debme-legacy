@@ -1,0 +1,4 @@
+- name: Tata
+  hosts: all
+  roles:
+    - tata

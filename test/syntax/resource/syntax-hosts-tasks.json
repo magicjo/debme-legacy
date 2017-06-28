@@ -1,0 +1,9 @@
+{
+  "localhost": {
+    "connection": {
+        "ansible_connection": "ssh",
+        "ansible_host": "localhost",
+        "ansible_user": "me"
+    }
+  }
+}
