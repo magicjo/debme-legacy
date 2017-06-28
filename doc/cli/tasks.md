@@ -100,4 +100,6 @@ Environments hosts described by a json file.
 
 ## Available tasks
 
-### TODO
+### system
+
+Task to configure the system (`ntp`, `shell`, ...) on the host.
