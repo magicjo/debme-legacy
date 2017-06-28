@@ -1,4 +1,9 @@
 ---
+- name: check OS ({{ ansible_distribution }} {{ ansible_distribution_major_version}})
+  fail:
+    msg: "The system must be debian 9."
+  when: not (ansible_distribution == "Debian" and ansible_distribution_major_version == "9")
+
 - include: registry.yml
 - include: info.yml
 - include: fish.yml
