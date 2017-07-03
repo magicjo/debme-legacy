@@ -17,7 +17,6 @@
 - name: (sshd) restart
   service:
     name: sshd
-    enabled: true
-    state: started
+    state: restarted
   when: ansible_virtualization_type != 'docker'
   become: yes
