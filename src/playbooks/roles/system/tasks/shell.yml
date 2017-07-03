@@ -1,0 +1,28 @@
+---
+- name: (shell) add dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python3-dev
+    - python3-pip
+
+  become: yes
+- name: (shell) install thefuck
+  pip:
+    name: thefuck
+  become: yes
+
+- name: (shell) configure fish
+  template:
+    src: config.fish.j2
+    dest: ~/.config/fish/config.fish
+    backup: yes
+    force: yes
+
+- name: (shell) configure bash
+  template:
+    src: bash_aliases.j2
+    dest: ~/.bash_aliases
+    backup: yes
+    force: yes

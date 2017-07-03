@@ -1,0 +1,21 @@
+# configure the fuck
+eval (thefuck --alias | tr '
+' ';')
+
+# custom for fish
+function mkcd --description 'runs mkdir, and then cd'
+	mkdir -p $argv
+	cd $argv
+end
+
+# add default aliases
+{% for alias in __system__shell_default_aliases %}
+# {{ alias.comment }}
+alias {{ alias.alias }}="{{ alias.command }}"
+{% endfor %}
+
+# add custom aliases
+{% for alias in __system__shell_aliases %}
+# {{ alias.comment }}
+alias {{ alias.alias }}="{{ alias.command }}"
+{% endfor %}
