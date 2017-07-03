@@ -100,6 +100,27 @@ Environments hosts described by a json file.
 
 ## Available tasks
 
-### system
+### System
 
 Task to configure the system (`ntp`, `shell`, ...) on the host.
+
+#### Configure System.tools
+
+- `system`
+    - `tools_ntp_servers` (*url[]*): The ntp servers to used. By default (*fr* ntp servers)
+
+```json
+{
+  ...
+  "vars": {
+    "system": {
+      "tools_ntp_servers": [
+        "0.fr.pool.ntp.org",
+        "1.fr.pool.ntp.org",
+        "2.fr.pool.ntp.org",
+        "3.fr.pool.ntp.org"
+      ]
+    }
+  }
+}
+```

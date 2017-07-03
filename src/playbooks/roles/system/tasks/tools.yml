@@ -1,0 +1,29 @@
+---
+- name: (tools) add dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - aptitude
+    - curl
+    - zip
+    - unzip
+    - unrar
+    - bzip2
+    - p7zip-full
+    - ntp
+  become: yes
+
+- name: (tools) configure ntp
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+    backup: yes
+    force: yes
+  become: yes
+
+- name: (tools) restart ntp
+  service:
+    name: ntp
+    state: restarted
+  become: yes
