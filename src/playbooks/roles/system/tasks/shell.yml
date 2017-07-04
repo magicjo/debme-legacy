@@ -6,8 +6,15 @@
   with_items:
     - python3-dev
     - python3-pip
-
+    - locales
   become: yes
+
+- name: (shell) ensure locale {{ __system__shell_locale }}
+  locale_gen:
+    name: "{{ __system__shell_locale }}"
+    state: present
+  become: yes
+
 - name: (shell) install thefuck
   pip:
     name: thefuck
@@ -26,3 +33,55 @@
     dest: ~/.bash_aliases
     backup: yes
     force: yes
+
+- name: (shell) download oh-my-fish
+  get_url:
+    url: https://get.oh-my.fish
+    dest: /tmp/install_oh_my_fish
+
+- name: (shell) install oh-my-fish
+  command: /usr/bin/fish /tmp/install_oh_my_fish --noninteractive --yes
+
+- name: (shell) ensure remove bobthefish
+  command: /usr/bin/fish -c 'omf remove bobthefish'
+  ignore_errors: yes
+
+- name: (shell) install bobthefish
+  command: /usr/bin/fish -c 'omf install bobthefish'
+  ignore_errors: yes
+
+- name: (shell) download fonts for bobthefish
+  get_url:
+    url: https://github.com/powerline/powerline/raw/develop/font/{{ item }}
+    dest: /tmp/{{ item }}
+  with_items:
+    - PowerlineSymbols.otf
+    - 10-powerline-symbols.conf
+
+- name: (shell) install powerline-status
+  pip:
+    name: powerline-status
+    extra_args: --user
+
+- name: (shell) install fontconfig
+  apt:
+    name: fontconfig
+    state: present
+  become: yes
+
+- name: (shell) ensure fonts directory
+  file:
+    path: ~/.fonts/
+    state: directory
+
+- name: (shell) copy fonts
+  copy:
+    remote_src: yes
+    src: /tmp/{{ item }}
+    dest: ~/.fonts/{{ item }}
+  with_items:
+    - PowerlineSymbols.otf
+    - 10-powerline-symbols.conf
+
+- name: (shell) update fonts cache
+  command: fc-cache -vf ~/.fonts/

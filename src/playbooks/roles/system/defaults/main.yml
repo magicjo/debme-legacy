@@ -127,3 +127,4 @@ __system__shell_default_aliases:
     alias: gpumeminfo
     command: 'grep -i --color memory /var/log/Xorg.0.log'
 __system__shell_aliases: []
+__system__shell_locale: 'en_US.UTF-8'

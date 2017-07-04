@@ -129,6 +129,7 @@ Task to configure the system (`ntp`, `shell`, ...) on the host.
 
 - `system`
     - `shell_aliases` (*alias[]*): The custom aliases to set. By default (`[]`)
+    - `shell_locale` (*locale*): The locale to use. By default (`"en_US.UTF-8"`)
 
 ```json
 {
@@ -141,7 +142,8 @@ Task to configure the system (`ntp`, `shell`, ...) on the host.
           "alias": "super",
           "command": "sudo -i"
         }
-      ]
+      ],
+      "shell_locale": "en_US.UTF-8"
     }
   }
 }
