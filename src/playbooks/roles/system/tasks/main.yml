@@ -1,0 +1,5 @@
+---
+- include: apps.yml
+- include: tools.yml
+- include: monitoring.yml
+- include: shell.yml

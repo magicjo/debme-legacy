@@ -1,4 +1,0 @@
-- name: Toto
-  hosts: all
-  roles:
-    - toto

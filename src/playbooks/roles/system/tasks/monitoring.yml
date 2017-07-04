@@ -1,0 +1,11 @@
+---
+- name: (monitoring) add dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - htop
+    - nmap
+    - iotop
+    - net-tools
+  become: yes

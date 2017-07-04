@@ -15,7 +15,7 @@ source "test/exec/inc/test.tasks.inc.sh"
 HAVE_START=false
 HAVE_TEST_SETUP=false
 HAVE_TEST_TASKS=false
-TEST_TASKS_LIST="toto tata"
+TEST_TASKS_LIST="system"
 HAVE_END=false
 if [[ $# -eq 0 ]]
 then

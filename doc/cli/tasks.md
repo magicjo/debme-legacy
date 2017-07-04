@@ -100,4 +100,51 @@ Environments hosts described by a json file.
 
 ## Available tasks
 
-### TODO
+### System
+
+Task to configure the system (`ntp`, `shell`, ...) on the host.
+
+#### Configure System.tools
+
+- `system`
+    - `tools_ntp_servers` (*url[]*): The ntp servers to used. By default (*fr* ntp servers)
+
+```json
+{
+  ...
+  "vars": {
+    "system": {
+      "tools_ntp_servers": [
+        "0.fr.pool.ntp.org",
+        "1.fr.pool.ntp.org",
+        "2.fr.pool.ntp.org",
+        "3.fr.pool.ntp.org"
+      ]
+    }
+  }
+}
+```
+
+#### Configure System.shell
+
+- `system`
+    - `shell_aliases` (*alias[]*): The custom aliases to set. By default (`[]`)
+    - `shell_locale` (*locale*): The locale to use. By default (`"en_US.UTF-8"`)
+
+```json
+{
+  ...
+  "vars": {
+    "system": {
+      "shell_aliases": [
+        {
+          "comment": "My super alias",
+          "alias": "super",
+          "command": "sudo -i"
+        }
+      ],
+      "shell_locale": "en_US.UTF-8"
+    }
+  }
+}
+```
