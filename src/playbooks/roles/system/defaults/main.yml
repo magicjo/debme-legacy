@@ -4,3 +4,127 @@ __system__tools_ntp_servers:
   - '1.fr.pool.ntp.org'
   - '2.fr.pool.ntp.org'
   - '3.fr.pool.ntp.org'
+
+# Alias from https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+__system__shell_default_aliases:
+  # LS
+  - comment: 'Colorize the ls output'
+    alias: ls
+    command: 'ls --color=auto'
+  - comment: 'List'
+    alias: ll
+    command: 'ls -l'
+  - comment: 'List all'
+    alias: la
+    command: 'ls -la'
+  - comment: 'Show hidden files'
+    alias: l.
+    command: 'ls -d .*'
+  # CD
+  - comment: 'Get rid of command not found'
+    alias: cd..
+    command: 'cd ..'
+  - comment: 'Quick cd parent'
+    alias: ..
+    command: 'cd ..'
+  - comment: 'Quick cd parent'
+    alias: ...
+    command: 'cd ../../../'
+  - comment: 'Quick cd parent'
+    alias: ....
+    command: 'cd ../../../../'
+  - comment: 'Quick cd parent'
+    alias: .....
+    command: 'cd ../../../../../'
+  - comment: 'Quick cd parent'
+    alias: .4
+    command: 'cd ../../../../'
+  - comment: 'Quick cd parent'
+    alias: .5
+    command: 'cd ../../../../../'
+  # GREP
+  - comment: 'Colorize grep'
+    alias: grep
+    command: 'grep --color=auto'
+  - comment: 'Colorize egrep'
+    alias: egrep
+    command: 'egrep --color=auto'
+  - comment: 'Colorize fgrep'
+    alias: fgrep
+    command: 'fgrep --color=auto'
+  # BC
+  - comment: 'Start calculator with math support'
+    alias: bc
+    command: 'bc -l'
+  # WGET
+  - comment: 'this one saved by butt so many times'
+    alias: wget
+    command: 'wget -c'
+  # OPENSSL
+  - comment: 'Generate sha1 digest'
+    alias: sha1
+    command: 'openssl sha1'
+  # SHORTCUT
+  - comment: 'shortcut for history'
+    alias: h
+    command: 'history'
+  - comment: 'shortcut for jobs'
+    alias: j
+    command: 'jobs -l'
+  # NEW SET OF COMMANDS
+  - comment: 'print date'
+    alias: now
+    command: 'date +"%T"'
+  - comment: 'print date'
+    alias: nowtime
+    command: 'now'
+  - comment: 'print date'
+    alias: nowdate
+    command: 'date +"%d-%m-%Y"'
+  # NETWORK
+  - comment: 'Stop after sending count ECHO_REQUEST packets'
+    alias: ping
+    command: 'ping -c 5'
+  - comment: 'Do not wait interval 1 second, go fast'
+    alias: fastping
+    command: 'ping -c 100 -s.2'
+  - comment: 'Show ports'
+    alias: ports
+    command: 'netstat -tulanp'
+  # SAFETY
+  - comment: 'rm preserve root'
+    alias: rm
+    command: 'rm --preserve-root'
+  - comment: 'chown preserve root'
+    alias: chown
+    command: 'chown --preserve-root'
+  - comment: 'chmod preserve root'
+    alias: chmod
+    command: 'chmod --preserve-root'
+  - comment: 'chgrp preserve root'
+    alias: chgrp
+    command: 'chgrp --preserve-root'
+  # MONITORING
+  - comment: 'pass options to free ##'
+    alias: meminfo
+    command: 'free -m -l -t'
+  - comment: 'get top process eating memory'
+    alias: psmem
+    command: 'ps auxf | sort -nr -k 4'
+  - comment: 'get top process eating memory 10'
+    alias: psmem10
+    command: 'ps auxf | sort -nr -k 4 | head -10'
+  - comment: 'get top process eating cpu'
+    alias: pscpu
+    command: 'ps auxf | sort -nr -k 3'
+  - comment: 'get top process eating cpu 10'
+    alias: pscpu10
+    command: 'ps auxf | sort -nr -k 3 | head -10'
+  - comment: 'Get server cpu info'
+    alias: cpuinfo
+    command: 'lscpu'
+  - comment: 'get GPU ram on desktop / laptop'
+    alias: gpumeminfo
+    command: 'grep -i --color memory /var/log/Xorg.0.log'
+__system__shell_aliases: []
+__system__shell_locale: 'en_US.UTF-8'
