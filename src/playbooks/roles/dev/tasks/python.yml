@@ -1,0 +1,23 @@
+---
+- name: (python) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python
+    - python3
+    - python-pip
+    - python3-pip
+  become: yes
+
+- name: (python) add tools
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - virtualenv
+    - pep8
+    - pyflakes
+    - flake8
+    - pylint
+    - sphinx
+  become: yes

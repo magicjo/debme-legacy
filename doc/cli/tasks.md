@@ -148,3 +148,7 @@ Task to configure the system (`ntp`, `shell`, ...) on the host.
   }
 }
 ```
+
+### Dev
+
+Task to install development software (`python`, `nodejs`, ...) on the host.
