@@ -2,6 +2,11 @@
 eval (thefuck --alias | tr '
 ' ';')
 
+# Load global profile fish
+for fsh in (ls /etc/profile.d/*.fish ^ /dev/null) #it doesn't matter if it doesn't exist
+	source $fsh
+end
+
 # custom for fish
 function mkcd --description 'runs mkdir, and then cd'
 	mkdir -p $argv

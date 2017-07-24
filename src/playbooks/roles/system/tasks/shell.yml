@@ -27,10 +27,17 @@
     backup: yes
     force: yes
 
-- name: (shell) configure bash
+- name: (shell) configure bash aliases
   template:
     src: bash_aliases.j2
     dest: ~/.bash_aliases
+    backup: yes
+    force: yes
+
+- name: (shell) configure bashrc
+  template:
+    src: bashrc.j2
+    dest: ~/.bashrc
     backup: yes
     force: yes
 
