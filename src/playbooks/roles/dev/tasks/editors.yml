@@ -1,0 +1,10 @@
+---
+- name: (editors) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nano
+    - vim
+    - emacs
+  become: yes
