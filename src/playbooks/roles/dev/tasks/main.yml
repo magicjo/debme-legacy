@@ -2,3 +2,4 @@
 - include: python.yml
 - include: editors.yml
 - include: golang.yml
+- include: c_++.yml
