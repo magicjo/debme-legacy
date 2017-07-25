@@ -3,3 +3,4 @@
 - include: editors.yml
 - include: golang.yml
 - include: c_++.yml
+- include: nodejs.yml

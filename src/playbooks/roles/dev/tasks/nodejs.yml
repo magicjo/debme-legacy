@@ -1,0 +1,57 @@
+---
+- name: (nodejs) install dependencies
+  apt:
+    name: apt-transport-https
+    state: present
+  with_items:
+    - apt-transport-https
+    - build-essential
+  become: yes
+
+- name: (nodejs) add key
+  apt_key:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280"
+    state: present
+  become: yes
+
+- name: (nodejs) add repository
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_{{ __dev__nodejs_version }} {{ ansible_distribution_release }} main"
+    filename: "nodejs"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: (nodejs) install nodejs
+  apt:
+    name: "nodejs={{ __dev__nodejs_version | regex_replace('x', '') }}*"
+    state: present
+  become: yes
+
+- name: (nodejs) ensure n
+  command: "npm install --save --global n"
+  become: yes
+
+- name: (nodejs) update nodejs
+  command: "n latest"
+  become: yes
+
+- name: (nodejs) install global npm modules default
+  command: "npm install --save --global {{ item }}"
+  with_items: "{{ __dev__nodejs_global_default_modules }}"
+  become: yes
+
+- name: (nodejs) update global npm modules default
+  command: "npm update --global {{ item }}"
+  with_items: "{{ __dev__nodejs_global_default_modules }}"
+  become: yes
+
+- name: (nodejs) install global npm modules custom
+  command: "npm install --save --global {{ item }}"
+  with_items: "{{ __dev__nodejs_global_custom_modules }}"
+  become: yes
+
+- name: (nodejs) update global npm modules custom
+  command: "npm update --global {{ item }}"
+  with_items: "{{ __dev__nodejs_global_custom_modules }}"
+  become: yes
