@@ -71,17 +71,22 @@
 
 - name: (shell) ensure fonts directory
   file:
-    path: ~/.fonts/
+    path: "{{ item }}"
     state: directory
+  with_items:
+    - "~/.fonts/"
+    - "~/.config/fontconfig/conf.d/"
 
 - name: (shell) copy fonts
   copy:
     remote_src: yes
-    src: /tmp/{{ item }}
-    dest: ~/.fonts/{{ item }}
+    src: "/tmp/{{ item.name }}"
+    dest: "{{ item.dest }}{{ item.name }}"
   with_items:
-    - PowerlineSymbols.otf
-    - 10-powerline-symbols.conf
+    - name: PowerlineSymbols.otf
+      dest: ~/.fonts/
+    - name: 10-powerline-symbols.conf
+      dest: ~/.config/fontconfig/conf.d/
 
 - name: (shell) update fonts cache
   command: fc-cache -vf ~/.fonts/
