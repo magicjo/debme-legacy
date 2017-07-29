@@ -1,0 +1,48 @@
+---
+- name: (tools) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+  become: yes
+
+- name: (tools) install gitflow + doxygen
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git-flow
+    - doxygen
+  become: yes
+
+- name: (tools) docker add key
+  shell: "curl -sSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+  become: yes
+
+- name: (tools) docker add repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_lsb.id|lower }} {{ ansible_lsb.codename|lower }} stable"
+    filename: "docker"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: (tools) install docker
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker-ce
+  become: yes
+
+- name: Add users to the docker group
+  user:
+    name:   "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  become: yes
