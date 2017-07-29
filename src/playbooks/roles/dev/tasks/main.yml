@@ -1,0 +1,8 @@
+---
+- include: python.yml
+- include: editors.yml
+- include: golang.yml
+- include: c_++.yml
+- include: nodejs.yml
+- include: java.yml
+- include: tools.yml

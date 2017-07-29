@@ -1,0 +1,52 @@
+---
+- name: (golang) check if already installed
+  stat:
+    path: "{{ __dev__golang_output_dir }}/go/bin/go"
+  register: check_golang
+
+- name: (golang) get tgz
+  get_url:
+    url: "https://storage.googleapis.com/golang/{{ __dev__golang_tgz }}"
+    dest: "/tmp/{{ __dev__golang_tgz }}"
+  become: yes
+  when: check_golang.stat.exists == False
+
+- name: (golang) ensure output directory
+  file:
+    path: "{{ __dev__golang_output_dir }}"
+    state: directory
+    mode: '0755'
+  become: true
+  when: check_golang.stat.exists == False
+
+- name: (golang) unpack tgz
+  file:
+    path: "{{ __dev__golang_output_dir }}"
+    state: directory
+    mode: '0755'
+  become: true
+  when: check_golang.stat.exists == False
+
+- name: (golang) unpack tgz
+  unarchive:
+    copy: no
+    src: "/tmp/{{ __dev__golang_tgz }}"
+    dest: "{{ __dev__golang_output_dir }}"
+  become: true
+  when: check_golang.stat.exists == False
+
+- name: (golang) configure bash
+  template:
+    src: golang.sh.j2
+    dest: /etc/profile.d/golang.sh
+    force: yes
+  become: true
+  when: check_golang.stat.exists == False
+
+- name: (golang) configure fish
+  template:
+    src: golang.fish.j2
+    dest: /etc/profile.d/golang.fish
+    force: yes
+  become: true
+  when: check_golang.stat.exists == False

@@ -1,0 +1,9 @@
+---
+__dev__golang_tgz: 'go1.8.3.linux-amd64.tar.gz'
+__dev__golang_output_dir: '/usr/local'
+
+__dev__nodejs_version: '6.x'
+__dev__nodejs_global_default_modules:
+  - http-server
+  - live-server
+__dev__nodejs_global_custom_modules: []

@@ -4,7 +4,8 @@
 import sys
 
 AVAILABLE_TASKS = [
-    'system'
+    'system',
+    'dev'
 ]
 
 
@@ -12,6 +13,7 @@ AVAILABLE_TASKS = [
 def list_tasks():
     print '''
 - system: task to configure the system (ntp, shell, ...) on the host.
+- dev   : task to install development software (python, nodejs, ...) on the host.
 '''
 
 

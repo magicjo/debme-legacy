@@ -148,3 +148,28 @@ Task to configure the system (`ntp`, `shell`, ...) on the host.
   }
 }
 ```
+
+### Dev
+
+Task to install development software (`python`, `nodejs`, ...) on the host.
+
+#### Configure Dev.nodejs
+
+- `dev`
+    - `nodejs_version` (*version*): The global `nodejs` version. By default (`"6.x"`)
+    - `nodejs_global_custom_modules` (*str[]*): The global modules to add. By default (`[]`)
+
+```json
+{
+  ...
+  "vars": {
+    "dev": {
+      "nodejs_version": "6.x",
+      "nodejs_global_custom_modules": [
+        "http-server",
+        "liver-server"
+      ]
+    }
+  }
+}
+```

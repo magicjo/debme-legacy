@@ -1,0 +1,51 @@
+---
+- name: (java) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - software-properties-common
+    - debconf-utils
+  become: yes
+
+- name: (java) add key
+  apt_key:
+    keyserver: "hkp://keyserver.ubuntu.com:80"
+    id: "EEA14886"
+    state: present
+  become: yes
+
+- name: (java) add repository
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+    filename: "java"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: (java) ensure man directory
+  file:
+    path: /usr/share/man/man1
+    state: directory
+  become: yes
+
+- name: (java) accept license
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+  become: yes
+
+- name: (java) install java
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - oracle-java8-installer
+    - oracle-java8-set-default
+    - oracle-java8-unlimited-jce-policy
+  become: yes
+
+- name: (java) install java tools
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - ant
+    - maven
+  become: yes
