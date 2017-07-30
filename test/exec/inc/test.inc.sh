@@ -7,16 +7,17 @@ function print_test(){
     local name="$1"
     local user="$2"
     local password="$3"
-    local first_line="$4"
+    local tasks="$4"
     cat <<-EOF
 ================================
 TEST ${name}
 ----------
-${first_line}
+ui: ${TEST__CLI_ARGS_UI}
 ip: ${TEST__CONF_SSH_IP}
 port: ${TEST__CONF_SSH_PORT}
 user: ${user}
 password: ${password}
+tasks: ${tasks}
 ================================
 EOF
     sleep "${TEST__CONF_TIMEOUT_TEST}"

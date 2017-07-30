@@ -13,24 +13,17 @@ Test exec for debme:
 ---------------------------------------------------------------------
     Common options:
 
-    ===========
-    setup:
+    --verbose (-v): Set verbosity for the tests.
 
     --test-setup (-r): Run the setup test.
         By default without the option "--ui"
         "debme setup ..."
 
-    --setup-enable-ui (-U): Add option "--ui" for the setup test.
-        "debme setup --ui ..."
-
-    ===========
-    tasks:
+    --enable-ui (-U): Enable support ui for the host.
 
     --test-tasks (-t): Run the tasks test.
         By default with all no "ui" tasks.
         "debme tasks ..."
-
-    --tasks-enable-ui (-A): Add all "ui" tasks for the tasks test.
 
     --tasks-names (-N) TASKS: Set the tasks for the tasks test.
         Join tasks names (TASKS) by semicolon: "system,dev,..."
@@ -84,20 +77,20 @@ function cli(){
             ## ------------------------------------------
             ## Common options:
 
+            --verbose|-v)
+                TEST__CLI_ARGS_VERBOSE='-vvvv'
+                shift
+                ;;
             --test-setup|-r)
                 TEST__CLI_ARGS_SETUP=true
                 shift
                 ;;
-            --setup-enable-ui|-U)
-                TEST__CLI_ARGS_SETUP_UI=true
+            --enable-ui|-U)
+                TEST__CLI_ARGS_UI='yes'
                 shift
                 ;;
             --test-tasks|-t)
                 TEST__CLI_ARGS_TASKS=true
-                shift
-                ;;
-            --tasks-enable-ui|-A)
-                TEST__CLI_ARGS_TASKS_NAMES=${TEST__CLI_ARGS_TASKS_UI_NAMES}
                 shift
                 ;;
             --tasks-names|-N)
