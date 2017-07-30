@@ -25,7 +25,10 @@ EOF
 
 function ssh_known_hosts(){
     ssh-keygen -f ~/.ssh/known_hosts -R "[${TEST__CONF_SSH_IP}]:${TEST__CONF_SSH_PORT}" > /dev/null 2>&1
-    ssh-keyscan "${TEST__CONF_SSH_IP}" -p "${TEST__CONF_SSH_PORT}" >> ~/.ssh/known_hosts
+    if [[ "${TEST__CLI_CMD}" = 'vm' ]]
+    then
+        ssh-keyscan "${TEST__CONF_SSH_IP}" -p "${TEST__CONF_SSH_PORT}" >> ~/.ssh/known_hosts
+    fi
 }
 
 function check_test(){
