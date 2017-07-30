@@ -66,4 +66,4 @@ clean:
 .PHONY: test
 test: clean
 	./test/syntax/test.sh
-	./test/exec/test.sh
+	./test/exec/test.sh docker --docker-start --test-setup --test-tasks --docker-end --verbose

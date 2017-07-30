@@ -1,0 +1,17 @@
+---
+- name: (desktop) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - tasksel
+  become: yes
+
+- name: (desktop) install gnome
+  shell: "tasksel install {{ item.pkg }} --new-install"
+  with_items:
+    - { pkg: 'desktop' }
+    - { pkg: 'laptop', create: "{{ __setup__desktop_laptop == 'yes' }}" }
+    - { pkg: 'gnome-desktop' }
+  when: item.create | default(True) | bool
+  become: yes

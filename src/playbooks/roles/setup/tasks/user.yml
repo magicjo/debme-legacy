@@ -3,6 +3,7 @@
   apt:
     name: sudo
     state: present
+  become: yes
 
 - name: (user) create the user '{{ __setup__user_login }}'
   user:

@@ -6,6 +6,7 @@
         "ansible_user": "$CONNECTION_USER",
         "ansible_ssh_port": "$CONNECTION_SSH_PORT",
         "ansible_ssh_pass": "$CONNECTION_SSH_PASSWORD"
-    }
+    },
+    "support_ui": "$SUPPORT_UI"
   }
 }

@@ -56,12 +56,16 @@ Environments hosts described by a json file.
                     "type": "object"
                     // The connection parameters of the remote
                 },
+                "support_ui": {
+                    "enum": ["yes", "no"]
+                    // If the host support gui
+                },
                 "vars": {
                     "type": "object"
                     // Variables used by the tasks
                 }
             },
-            "required": ["connection"]
+            "required": ["connection", "support_ui"]
         }
     }
 }
@@ -78,7 +82,8 @@ Environments hosts described by a json file.
         "ansible_connection": "ssh",
         "ansible_host": "localhost",
         "ansible_user": "me"
-    }
+    },
+    "support_ui": "no"
   },
   "my-server": {
     "connection": {
@@ -87,6 +92,7 @@ Environments hosts described by a json file.
         "ansible_user": "root",
         "ansible_ssh_pass": "123456789"
     },
+    "support_ui": "yes",
     "vars": {
         "task1": {
             ...

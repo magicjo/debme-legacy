@@ -1,4 +1,5 @@
 - name: Setup
   hosts: all
   roles:
-    - setup
+    - 'setup'
+    - { role: 'setup:ui', when: "__support_ui == 'yes'"}

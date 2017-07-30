@@ -51,12 +51,16 @@ Environments hosts described by a json file.
                     "type": "object"
                     // The connection parameters of the remote
                 },
+                "support_ui": {
+                    "enum": ["yes", "no"]
+                    // If the host support gui
+                },
                 "vars": {
                     "type": "object"
                     // Variables used by the tasks
                 }
             },
-            "required": ["connection"]
+            "required": ["connection", "support_ui"]
         }
     }
 }
@@ -73,7 +77,8 @@ Environments hosts described by a json file.
         "ansible_connection": "ssh",
         "ansible_host": "localhost",
         "ansible_user": "me"
-    }
+    },
+    "support_ui": "no"
   },
   "my-server": {
     "connection": {
@@ -81,7 +86,8 @@ Environments hosts described by a json file.
         "ansible_host": "10.10.10.10",
         "ansible_user": "root",
         "ansible_ssh_pass": "123456789"
-    },
+    },,
+    "support_ui": "yes",
     "vars": {
         "setup": {
             ...
@@ -154,6 +160,22 @@ Environments hosts described by a json file.
       "user_identity": "My User",
       "user_password": "$6$ZInTPAVe2FbY5UEV$X6bTmG4ZUgBAZ4j4BxhGBkGgtNSNwpCOa7lI/zJyTUHfN6GLgRe4JF/.L228ozUlutAbJlmcwS4F0QER4cznu1",
       "user_shell": "/usr/bin/fish"
+    }
+  }
+}
+```
+
+#### Setup.desktop (UI)
+
+- `setup`
+    - `desktop_laptop` (*yes|no*): If the host is a `laptop`. By default (`"no"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "desktop_laptop": "no"
     }
   }
 }
