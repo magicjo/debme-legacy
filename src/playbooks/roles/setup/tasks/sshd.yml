@@ -13,10 +13,3 @@
     backup: yes
     force: yes
   become: yes
-
-- name: (sshd) restart
-  service:
-    name: sshd
-    state: restarted
-  when: ansible_virtualization_type != 'docker'
-  become: yes
