@@ -1,7 +1,8 @@
 # Setup cli
 
 Command used to setup the remote environment for `debme`.
-You must run this command once before install other tasks
+You must run this command once **before install other tasks**.
+You must also **reboot your computer after** run this command to apply all changes.
 
 ## Example
 
@@ -192,6 +193,41 @@ Environments hosts described by a json file.
   "vars": {
     "setup": {
       "desktop_laptop": "no"
+    }
+  }
+}
+```
+
+#### Setup.graphical (UI)
+
+**Warning ! To install bumblebee with the nvidia driver you must have a compatible computer.**
+
+**Before starting the installation you must first disable the nouveau driver**
+
+- Edit file `/etc/default/grub`
+    - `GRUB_CMDLINE_LINUX_DEFAULT="quiet nouveau.modeset=0 modprobe.blacklist=nouveau"`
+- Remove files `/etc/X11/xorg.conf` and `/etc/X11/xorg.conf.d`
+- `modprobe -r nouveau`
+- `modprobe -r vga_switcheroo` 
+- `update-grub`
+- Restart computer
+
+For more details:
+> https://wiki.debian.org/Bumblebee
+
+> https://wiki.debian.org/NvidiaGraphicsDrivers/Optimus 
+
+> https://www.pcsuggest.com/install-and-configure-nvidia-optimus-with-bumblebee-in-debian/
+
+- `setup`
+    - `graphical_bumblebee` (*yes|no*): If you want to install `bumblebee` with `nvidia`. By default (`"no"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "graphical_bumblebee": "no"
     }
   }
 }
