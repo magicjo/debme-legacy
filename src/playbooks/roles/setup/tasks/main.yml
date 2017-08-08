@@ -10,3 +10,4 @@
 - include: fish.yml
 - include: user.yml
 - include: sshd.yml
+- include: firmware.yml
