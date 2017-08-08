@@ -165,6 +165,22 @@ Environments hosts described by a json file.
 }
 ```
 
+#### Setup.firmware
+
+- `setup`
+    - `firmware` (*firmware[]*): The list of firmwares package to install (`[]`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "firmware": ["firmware-realtek", "firmware-iwlwifi"]
+    }
+  }
+}
+```
+
 #### Setup.desktop (UI)
 
 - `setup`
