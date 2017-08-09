@@ -1,0 +1,65 @@
+---
+- name: (graphical) add architecture i386
+  shell: "dpkg --add-architecture i386"
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) update source.list cache
+  apt:
+    update_cache: yes
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) get os headers
+  shell: "uname -r"
+  register: graphical_uname
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - primus-libs-ia32
+    - gcc
+    - linux-headers-amd64
+    - dkms
+    - bbswitch-dkms
+    - bumblebee
+    - mesa-utils
+    - bumblebee-nvidia
+    - primus
+    - nvidia-kernel-dkms
+    - nvidia-xconfig
+    - nvidia-settings
+    - nvidia-vdpau-driver
+    - vdpau-va-driver
+    - xserver-xorg-video-nvidia
+    - "linux-headers-{{ graphical_uname.stdout }}"
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) download virtualgl
+  get_url:
+    url: "https://netix.dl.sourceforge.net/project/virtualgl/{{ __setup__graphical_virtualgl }}/virtualgl_{{ __setup__graphical_virtualgl }}_amd64.deb"
+    dest: "/tmp/virtualgl_{{ __setup__graphical_virtualgl }}_amd64.deb"
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) install virtualgl
+  shell: "dpkg -i /tmp/virtualgl_{{ __setup__graphical_virtualgl }}_amd64.deb"
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) add group bumblebee
+  user:
+    name: "{{ __setup__user_login }}"
+    group: bumblebee
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
+
+- name: (graphical) configure bumblebee
+  template:
+    src: bumblebee.conf.j2
+    dest: /etc/bumblebee/bumblebee.conf
+  become: yes
+  when: __setup__graphical_bumblebee == 'yes'
