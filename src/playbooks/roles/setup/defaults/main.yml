@@ -12,3 +12,5 @@ __setup__user_login: 'user'
 __setup__user_identity: 'My User'
 __setup__user_password: '$6$ZInTPAVe2FbY5UEV$X6bTmG4ZUgBAZ4j4BxhGBkGgtNSNwpCOa7lI/zJyTUHfN6GLgRe4JF/.L228ozUlutAbJlmcwS4F0QER4cznu1' # mkpasswd --method=sha-512 password
 __setup__user_shell: '/usr/bin/fish'
+
+__setup__firmware: []

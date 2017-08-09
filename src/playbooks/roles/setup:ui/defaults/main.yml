@@ -1,0 +1,5 @@
+---
+__setup__desktop_laptop: 'no'
+
+__setup__graphical_bumblebee: 'no'
+__setup__graphical_virtualgl: '2.5.2'

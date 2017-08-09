@@ -24,15 +24,21 @@ def create_hosts(output_dir, hosts_path, available_host_names):
             # Header host
             file.write('[' + host_name + ']\n')
             # Connection host
+            if 'connection' not in host:
+                raise Exception('You need to define the key "connection" for each host.')
             connection = host_name
             for connection_param_key, connection_param_value in host['connection'].items():
                 connection += ' ' + connection_param_key + '=' + connection_param_value
             file.write(connection + '\n')
             # Separator
             file.write('\n')
+            # Header host vars
+            file.write('[' + host_name + ':vars]\n')
+            # Support ui
+            if 'support_ui' not in host:
+                raise Exception('You need to define the key "support_ui" for each host.')
+            file.write('__support_ui=' + host['support_ui'] + '\n')
             if 'vars' in host:
-                # Header host vars
-                file.write('[' + host_name + ':vars]\n')
                 # Vars host
                 for vars_key_group, vars_value_group in host['vars'].items():
                     for vars_key, vars_value in vars_value_group.items():

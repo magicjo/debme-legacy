@@ -3,14 +3,16 @@
 set -o nounset
 set -o errexit
 
-function run_setup_test(){
-    local envs_file="$1"
+function setup_test(){
+    print_test "SETUP" "${TEST__CONF_SETUP_SSH_USER}" "${TEST__CONF_SETUP_SSH_PASSWORD}" "setup"
+    ssh_known_hosts
+
+    local envs_file=$(template_setup_connection)
     local tmpfile=$(mktemp "${TEST__CONF_SETUP_TMP}.XXXXXX")
-    ssh-keygen -f ~/.ssh/known_hosts -R "[${TEST__CONF_DOCKER_SSH_IP}]:${TEST__CONF_DOCKER_SSH_PORT}" > /dev/null 2>&1
+    echo "setup_host_file: ${envs_file}"
     tail --follow ${tmpfile} &
-    ${TEST__DEBME_BIN} setup --envs "${envs_file}" -vvvv >> ${tmpfile}
-    echo "CHECK failed";
-    tail -n 2 ${tmpfile} | grep "failed=0"
-    echo "CHECK unreachable"
-    tail -n 2 ${tmpfile} | grep "unreachable=0"
+
+    ${TEST__DEBME_BIN} setup --envs "${envs_file}" "${TEST__CLI_ARGS_VERBOSE}" >> ${tmpfile}
+
+    check_test "${tmpfile}"
 }

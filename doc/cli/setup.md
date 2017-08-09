@@ -1,7 +1,8 @@
 # Setup cli
 
 Command used to setup the remote environment for `debme`.
-You must run this command once before install other tasks
+You must run this command once **before install other tasks**.
+You must also **reboot your computer after** run this command to apply all changes.
 
 ## Example
 
@@ -51,12 +52,16 @@ Environments hosts described by a json file.
                     "type": "object"
                     // The connection parameters of the remote
                 },
+                "support_ui": {
+                    "enum": ["yes", "no"]
+                    // If the host support gui
+                },
                 "vars": {
                     "type": "object"
                     // Variables used by the tasks
                 }
             },
-            "required": ["connection"]
+            "required": ["connection", "support_ui"]
         }
     }
 }
@@ -73,7 +78,8 @@ Environments hosts described by a json file.
         "ansible_connection": "ssh",
         "ansible_host": "localhost",
         "ansible_user": "me"
-    }
+    },
+    "support_ui": "no"
   },
   "my-server": {
     "connection": {
@@ -81,7 +87,8 @@ Environments hosts described by a json file.
         "ansible_host": "10.10.10.10",
         "ansible_user": "root",
         "ansible_ssh_pass": "123456789"
-    },
+    },,
+    "support_ui": "yes",
     "vars": {
         "setup": {
             ...
@@ -154,6 +161,73 @@ Environments hosts described by a json file.
       "user_identity": "My User",
       "user_password": "$6$ZInTPAVe2FbY5UEV$X6bTmG4ZUgBAZ4j4BxhGBkGgtNSNwpCOa7lI/zJyTUHfN6GLgRe4JF/.L228ozUlutAbJlmcwS4F0QER4cznu1",
       "user_shell": "/usr/bin/fish"
+    }
+  }
+}
+```
+
+#### Setup.firmware
+
+- `setup`
+    - `firmware` (*firmware[]*): The list of firmwares package to install (`[]`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "firmware": ["firmware-realtek", "firmware-iwlwifi"]
+    }
+  }
+}
+```
+
+#### Setup.desktop (UI)
+
+- `setup`
+    - `desktop_laptop` (*yes|no*): If the host is a `laptop`. By default (`"no"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "desktop_laptop": "no"
+    }
+  }
+}
+```
+
+#### Setup.graphical (UI)
+
+**Warning ! To install bumblebee with the nvidia driver you must have a compatible computer.**
+
+**Before starting the installation you must first disable the nouveau driver**
+
+- Edit file `/etc/default/grub`
+    - `GRUB_CMDLINE_LINUX_DEFAULT="quiet nouveau.modeset=0 modprobe.blacklist=nouveau"`
+- Remove files `/etc/X11/xorg.conf` and `/etc/X11/xorg.conf.d`
+- `modprobe -r nouveau`
+- `modprobe -r vga_switcheroo` 
+- `update-grub`
+- Restart computer
+
+For more details:
+> https://wiki.debian.org/Bumblebee
+
+> https://wiki.debian.org/NvidiaGraphicsDrivers/Optimus 
+
+> https://www.pcsuggest.com/install-and-configure-nvidia-optimus-with-bumblebee-in-debian/
+
+- `setup`
+    - `graphical_bumblebee` (*yes|no*): If you want to install `bumblebee` with `nvidia`. By default (`"no"`)
+
+```json
+{
+  ...
+  "vars": {
+    "setup": {
+      "graphical_bumblebee": "no"
     }
   }
 }
