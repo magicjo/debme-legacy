@@ -1,0 +1,14 @@
+---
+__gnome_extensions_enable:
+    - launch-new-instance@gnome-shell-extensions.gcampax.github.com
+    - window-list@gnome-shell-extensions.gcampax.github.com
+    - places-menu@gnome-shell-extensions.gcampax.github.com
+    - apps-menu@gnome-shell-extensions.gcampax.github.com
+    - alternate-tab@gnome-shell-extensions.gcampax.github.com
+__gnome_extensions_configure:
+    - schema: org.gnome.shell.extensions.window-list
+      key: grouping-mode
+      value: "auto"
+    - schema: org.gnome.shell.extensions.window-list
+      key: show-on-all-monitors
+      value: "false"
