@@ -179,3 +179,53 @@ Task to install development software (`python`, `nodejs`, ...) on the host.
   }
 }
 ```
+
+### Gnome
+
+Task to configure the `gnome` environment on the host.
+
+#### Configure Gnome.extensions (UI)
+
+- `gnome`
+    - `extensions_enable` (*str*): The extensions to enable. By default
+        - `launch-new-instance@gnome-shell-extensions.gcampax.github.com`
+        - `window-list@gnome-shell-extensions.gcampax.github.com`
+        - `places-menu@gnome-shell-extensions.gcampax.github.com`
+        - `apps-menu@gnome-shell-extensions.gcampax.github.com`
+        - `alternate-tab@gnome-shell-extensions.gcampax.github.com`
+    - `extensions_configure` (*conf[]*): The extensions configuration (`gsettings set schema key value`). By default
+        - *schema*: `"org.gnome.shell.extensions.window-list"`,
+          *key*: `"grouping-mode"`,
+          *value*: `"auto"`
+        - *schema*: `"org.gnome.shell.extensions.window-list"`,
+          *key*: `"show-on-all-monitors"`,
+          *value*: `"false"`
+
+```json
+{
+  ...
+  "vars": {
+    "gnome": {
+      "extensions_enable":[
+        "launch-new-instance@gnome-shell-extensions.gcampax.github.com",
+        "window-list@gnome-shell-extensions.gcampax.github.com",
+        "places-menu@gnome-shell-extensions.gcampax.github.com",
+        "apps-menu@gnome-shell-extensions.gcampax.github.com",
+        "alternate-tab@gnome-shell-extensions.gcampax.github.com"
+      ],
+      "extensions_configure": [
+        {
+            "schema": "org.gnome.shell.extensions.window-list",
+            "key": "grouping-mode",
+            "value": "auto"
+        },
+        {
+            "schema": "org.gnome.shell.extensions.window-list",
+            "key": "show-on-all-monitors",
+            "value": "false"
+        }
+      ]
+    }
+  }
+}
+```

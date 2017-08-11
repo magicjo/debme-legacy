@@ -1,0 +1,4 @@
+- name: Gnome
+  hosts: all
+  roles:
+    - { role: 'gnome:ui', when: "__support_ui == 'yes'"}

@@ -1,0 +1,9 @@
+---
+- name: (extensions) enable extensions
+  shell: "gnome-shell-extension-tool --enable-extension={{ item }}"
+  ignore_errors: yes
+  with_items: "{{ __gnome_extensions_enable }}"
+
+- name: (extensions) configure extensions
+  shell: "gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}"
+  with_items: "{{ __gnome_extensions_configure }}"
