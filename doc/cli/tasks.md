@@ -229,3 +229,53 @@ Task to configure the `gnome` environment on the host.
   }
 }
 ```
+
+#### Configure Gnome.shortcuts (UI)
+
+- `gnome`
+    - `shortcuts_wm` (*keybinding[]*): Configure `org.gnome.desktop.wm.keybindings`. By default (`[]`). You can see defined *key bindings* with
+      `gsettings list-recursively org.gnome.desktop.wm.keybindings`.
+        - *name*: The action name to bind, see `gsettings list-keys org.gnome.desktop.wm.keybindings`,
+        - *key*: The key to bind, example `<Alt>F4`.
+    - `shortcuts_mutter` (*keybinding[]*): Configure `org.gnome.mutter.keybindings`. By default (`[]`). You can see defined *key bindings* with
+      `gsettings list-recursively org.gnome.mutter.keybindings`.
+        - *name*: The action name to bind, see `gsettings list-keys org.gnome.mutter.keybindings`,
+        - *key*: The key to bind, example `<Super>Right`.
+    - `shortcuts_shell` (*keybinding[]*): Configure `org.gnome.shell.keybindings`. By default (`[]`). You can see defined *key bindings* with
+      `gsettings list-recursively org.gnome.shell.keybindings`.
+        - *name*: The action name to bind, see `gsettings list-keys org.gnome.shell.keybindings`,
+        - *key*: The key to bind, example `<Super>s`.
+    - `shortcuts_media_keys` (*keybinding[]*): Configure `org.gnome.settings-daemon.plugins.media-keys`. By default (`[]`). You can see defined *key bindings* with
+      `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys`.
+        - *name*: The action name to bind, see `gsettings list-keys org.gnome.settings-daemon.plugins.media-keys`,
+        - *key*: The key to bind, example `<Control><Alt>Delete`.
+    - `shortcuts_custom` (*keybinding[]*): Add custom *key bindings*. By default (`[]`). 
+        - *name*: The key binding name, example `terminal`.
+        - *key*: The key to bind, example `<Super>1`.
+        - *command*: The command to execute, example `gnome-terminal`.
+
+```json
+{
+  ...
+  "vars": {
+    "gnome": {
+      "shortcuts_wm":[
+        {"name": "close", "key": "<Alt>F4"}
+      ],
+      "shortcuts_mutter":[
+        {"name": "toggle-tiled-right", "key": "<Super>Right"}
+      ],
+      "shortcuts_shell":[
+        {"name": "toggle-overview", "key": "<Super>s"}
+      ],
+      "shortcuts_media_keys":[
+        {"name": "logout", "key": "<Control><Alt>Delete"}
+      ],
+      "shortcuts_custom":[
+        {"name": "terminal", "key": "<Super>1", "command": "gnome-terminal"},
+        {"name": "monitor", "key": "<Super>2", "command": "gnome-system-monitor"}
+      ]
+    }
+  }
+}
+```

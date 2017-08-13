@@ -12,3 +12,9 @@ __gnome_extensions_configure:
     - schema: org.gnome.shell.extensions.window-list
       key: show-on-all-monitors
       value: "false"
+
+__gnome_shortcuts_wm: []
+__gnome_shortcuts_mutter: []
+__gnome_shortcuts_shell: []
+__gnome_shortcuts_media_keys: []
+__gnome_shortcuts_custom: []
