@@ -5,17 +5,24 @@
     state: present
   become: yes
 
+- name: (user) create group '{{ __setup__user_login }}'
+  group:
+    name: "{{ __setup__user_login }}"
+    state: present
+  become: yes
+
 - name: (user) create the user '{{ __setup__user_login }}'
   user:
     name: "{{ __setup__user_login }}"
     comment: "{{ __setup__user_identity }}"
     createhome: yes
-    group: sudo
+    groups: "{{ __setup__user_login }},sudo"
     password: "{{ __setup__user_password }}"
     shell: "{{ __setup__user_shell }}"
     generate_ssh_key: yes
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
+    append: yes
   become: yes
 
 - name: (user) sudo the user '{{ __setup__user_login }}'

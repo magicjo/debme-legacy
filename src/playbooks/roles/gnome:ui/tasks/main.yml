@@ -1,3 +1,4 @@
 ---
 - include: extensions.yml
 - include: shortcuts.yml
+- include: style.yml

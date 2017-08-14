@@ -1,11 +1,11 @@
 ---
-__gnome_extensions_enable:
+__gnome__extensions_enable:
     - launch-new-instance@gnome-shell-extensions.gcampax.github.com
     - window-list@gnome-shell-extensions.gcampax.github.com
     - places-menu@gnome-shell-extensions.gcampax.github.com
     - apps-menu@gnome-shell-extensions.gcampax.github.com
     - alternate-tab@gnome-shell-extensions.gcampax.github.com
-__gnome_extensions_configure:
+__gnome__extensions_configure:
     - schema: org.gnome.shell.extensions.window-list
       key: grouping-mode
       value: "auto"
@@ -13,8 +13,21 @@ __gnome_extensions_configure:
       key: show-on-all-monitors
       value: "false"
 
-__gnome_shortcuts_wm: []
-__gnome_shortcuts_mutter: []
-__gnome_shortcuts_shell: []
-__gnome_shortcuts_media_keys: []
-__gnome_shortcuts_custom: []
+__gnome__shortcuts_wm: []
+__gnome__shortcuts_mutter: []
+__gnome__shortcuts_shell: []
+__gnome__shortcuts_media_keys: []
+__gnome__shortcuts_custom: []
+
+__gnome__style_configure:
+    - schema: org.gnome.desktop.calendar
+      key: show-weekdate
+      value: "true"
+    - schema: org.gnome.desktop.peripherals.touchpad
+      key: tap-to-click
+      value: "true"
+    - schema: org.gnome.desktop.background
+      key: show-desktop-icons
+      value: "true"
+
+__gnome__style_wallpapers: "Images/Wallpapers"
