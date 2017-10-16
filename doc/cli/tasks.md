@@ -315,3 +315,9 @@ Task to configure the `gnome` environment on the host.
   }
 }
 ```
+
+### Internet
+
+Task to install and configure `internet` software on the host.
+
+Nothing to configure.

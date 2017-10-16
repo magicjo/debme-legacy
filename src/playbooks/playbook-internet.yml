@@ -1,0 +1,4 @@
+- name: Internet
+  hosts: all
+  roles:
+    - { role: 'internet:ui', when: "__support_ui == 'yes'"}
