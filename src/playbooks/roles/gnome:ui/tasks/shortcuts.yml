@@ -1,0 +1,35 @@
+---
+- name: (shortcuts) configure org.gnome.desktop.wm.keybindings
+  shell: "gsettings set org.gnome.desktop.wm.keybindings {{ item.name }} '[{{ item.key | to_json }}]'"
+  with_items: "{{ __gnome__shortcuts_wm }}"
+
+- name: (shortcuts) configure org.gnome.mutter.keybindings
+  shell: "gsettings set org.gnome.mutter.keybindings {{ item.name }} '[{{ item.key | to_json }}]'"
+  with_items: "{{ __gnome__shortcuts_mutter }}"
+
+- name: (shortcuts) configure org.gnome.shell.keybindings
+  shell: "gsettings set org.gnome.shell.keybindings {{ item.name }} '[{{ item.key | to_json }}]'"
+  with_items: "{{ __gnome__shortcuts_shell }}"
+
+- name: (shortcuts) configure org.gnome.settings-daemon.plugins.media-keys
+  shell: "gsettings set org.gnome.settings-daemon.plugins.media-keys {{ item.name }} '{{ item.key }}'"
+  with_items: "{{ __gnome__shortcuts_media_keys }}"
+
+- name: (shortcuts) set fact
+  set_fact:
+    __gnome__shortcuts_custom_computed: "{{ __gnome__shortcuts_custom|map(attribute='name') | map('regex_replace', '(.*)', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/\\g<1>/') | list  }}"
+
+- name: (shortcuts) create customs
+  shell: "gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings '{{ __gnome__shortcuts_custom_computed | to_json }}' "
+
+- name: (shortcuts) configure customs name
+  shell: "gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/{{ item.name }}/ name '{{ item.name | escape }}'"
+  with_items: "{{ __gnome__shortcuts_custom }}"
+
+- name: (shortcuts) configure customs command
+  shell: "gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/{{ item.name }}/ command '{{ item.command | escape }}'"
+  with_items: "{{ __gnome__shortcuts_custom }}"
+
+- name: (shortcuts) configure customs binding
+  shell: "gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/{{ item.name }}/ binding '{{ item.key }}'"
+  with_items: "{{ __gnome__shortcuts_custom }}"
