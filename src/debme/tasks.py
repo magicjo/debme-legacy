@@ -6,16 +6,18 @@ import sys
 AVAILABLE_TASKS = [
     'system',
     'dev',
-    'gnome'
+    'gnome',
+    'internet'
 ]
 
 
 # List task
 def list_tasks():
     print '''
-- system: task to configure the system (ntp, shell, ...) on the host.
-- dev   : task to install development software (python, nodejs, ...) on the host.
-- gnome : task to configure the gnome environment on the host.
+- system   : task to configure the system (ntp, shell, ...) on the host.
+- dev      : task to install development software (python, nodejs, ...) on the host.
+- gnome    : task to configure the gnome environment on the host.
+- internet : task to install internet software (browsers, email-client, ...) on the host.
 '''
 
 
