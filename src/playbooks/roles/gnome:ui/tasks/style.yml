@@ -1,0 +1,72 @@
+---
+- name: (style) install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - alacarte
+    - gnome-shell-extensions
+    - dconf-tools
+    - dconf-editor
+  become: yes
+
+- name: (style) configure gnome
+  shell: "gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}"
+  with_items: "{{ __gnome__style_configure }}"
+
+- name: (style) set fact
+  set_fact:
+    __gnome__style_output_dir: "/home/{{ ansible_user }}/{{ __gnome__style_wallpapers }}"
+
+- name: (style) ensure wallpapers directory
+  file:
+    path: "{{ __gnome__style_output_dir }}"
+    state: directory
+
+- name: (style) copy avatar image
+  copy:
+    src: "{{ __gnome__style_avatar }}"
+    dest: "{{ __gnome__style_output_dir }}/{{ __gnome__style_avatar | basename }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  when: __gnome__style_avatar is defined
+
+- name: (style) get user lang
+  shell: "echo $LANG"
+  register: __gnome__style_user_lang
+  when: __gnome__style_avatar is defined
+
+- name: (style) change avatar
+  template:
+    src: user.j2
+    dest: "/var/lib/AccountsService/users/{{ ansible_user }}"
+    force: yes
+  become: true
+  when: __gnome__style_avatar is defined
+
+- name: (style) copy background image
+  copy:
+    src: "{{ __gnome__style_background }}"
+    dest: "{{ __gnome__style_output_dir }}/{{ __gnome__style_background | basename }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  when: __gnome__style_background is defined
+
+- name: (style) change background
+  shell: "gsettings set org.gnome.desktop.background picture-uri 'file://{{ __gnome__style_output_dir }}/{{ __gnome__style_background | basename }}'"
+  when: __gnome__style_background is defined
+
+- name: (style) copy screen-saver image
+  copy:
+    src: "{{ __gnome__style_screensaver }}"
+    dest: "{{ __gnome__style_output_dir }}/{{ __gnome__style_screensaver | basename }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  when: __gnome__style_screensaver is defined
+
+- name: (style) change background
+  shell: "gsettings set org.gnome.desktop.screensaver picture-uri 'file://{{ __gnome__style_output_dir }}/{{ __gnome__style_screensaver | basename }}'"
+  when: __gnome__style_screensaver is defined

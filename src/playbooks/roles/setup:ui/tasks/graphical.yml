@@ -54,6 +54,7 @@
   user:
     name: "{{ __setup__user_login }}"
     group: bumblebee
+    append: yes
   become: yes
   when: __setup__graphical_bumblebee == 'yes'
 

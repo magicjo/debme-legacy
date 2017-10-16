@@ -279,3 +279,39 @@ Task to configure the `gnome` environment on the host.
   }
 }
 ```
+
+#### Configure Gnome.style (UI)
+
+- `gnome`
+    - `style_configure` (*gnome-conf[]*): Configure `gnome schemas`.
+        - The list of `schemas` to set:
+            - *schema*: The schema to set, example `org.gnome.desktop.calendar`,
+            - *key*: The key to set, example `show-weekdate`.
+            - *value*: The new value, example `"true"`.
+        - By default
+            - schema: `org.gnome.desktop.calendar`, key: `show-weekdate`, value: `"true"`
+            - schema: `org.gnome.desktop.peripherals.touchpad`, key: `tap-to-click`, value: `"true"`
+            - schema: `org.gnome.desktop.background`, key: `show-desktop-icons`, value: `"true"`
+    - `style_wallpapers` (*path*): Configure the output user wallpapers (on the host). By default `Images/Wallpapers`.
+    - `style_avatar` (*path*): Configure the user avatar image. Set the path of your own local image. *Warning, must be an absolute path*.
+    - `style_background` (*path*): Configure the user background image. Set the path of your own local *image. Warning, must be an absolute path*.
+    - `style_screensaver` (*path*): Configure the user screen-saver image. Set the path of your own local image. *Warning, must be an absolute path*.
+
+```json
+{
+  ...
+  "vars": {
+    "gnome": {
+      "style_configure":[
+        {"schema": "org.gnome.desktop.calendar", "key": "show-weekdate", "value": "'true'"},
+        {"schema": "org.gnome.desktop.peripherals.touchpad", "key": "tap-to-click", "value": "'true'"},
+        {"schema": "org.gnome.desktop.background", "key": "show-desktop-icons", "value": "'true'"}
+      ],
+      "style_wallpapers": "Images/Wallpapers",
+      "style_avatar": "~/my_local.avatar.png",
+      "style_background": "~/my_local.background.png",
+      "style_screensaver": "~/my_local.screensaver.png"
+    }
+  }
+}
+```
