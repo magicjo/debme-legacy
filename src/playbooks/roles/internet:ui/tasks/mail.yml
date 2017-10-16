@@ -1,0 +1,8 @@
+---
+- name: (mail) install mail client
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - thunderbird
+  become: yes
